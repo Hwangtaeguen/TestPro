@@ -1,5 +1,6 @@
-import {View, Button, Text, TouchableOpacity} from 'react-native';
+import {View, Button, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Image } from "react-native"
+import { useNavigation } from '@react-navigation/native';
 
 //이미지 URL 객체
 const imageURL={
@@ -13,7 +14,7 @@ const imageURL={
 const Choose = (props) =>{
     return (
         <TouchableOpacity
-            onPress={() => alert(props.name)}
+            onPress={() => props.navigation.navigate("StartQ")}
             style={{width:40,height:40,alignItems:'center'}}>
             <Image
             style={{
@@ -29,7 +30,7 @@ const Choose = (props) =>{
 }  
 
 //HOME VIEW
-const Home = () => {
+const Home = (props) => {
     return (
         <View style = {{flex:1,paddind:40}}>
             <View style={{flex:0.1}}/>
@@ -44,21 +45,23 @@ const Home = () => {
                 source = {require("../assets/smiling-face.png")}/>
                 <Text style={{fontSize:25, fontWeight:'bold'}}>CHOOSE WHAT YOU WANT!</Text>
             </View>
-            <View style ={{
-                flex:2,
-                flexDirection:'row',
-                justifyContent:'space-around',
-                alignItems:'center'
-            }}>
+            <View style = {styles.Character}>
+                    <TouchableOpacity
+                    onPress={() => props.navigation.navigate ("StartQ")}
+                    style={{width:40,height:40,alignItems:'center'}}>
+                    <Image
+                    style={{
+                        width: 115,
+                        height: 115,
+                        overflow: 'hidden'
+                    }}
+                    source = {require("../assets/Todd.png")}
+                    />
+                </TouchableOpacity>
                 <Choose name = 'Jen' title = "Jen's Curtains"/>
                 <Choose name = 'Todd' title = "Todd's Order"/>
             </View>
-            <View style ={{
-                flex:2,
-                flexDirection:'row',
-                justifyContent:'space-around',
-                alignItems:'center'
-            }}>
+            <View style = {styles.Character}>
                 <Choose name = 'Ava' title = "Ava's Goal"/>
                 <Choose name = 'Mario' title = "Mario's Trip"/>
             </View>
@@ -66,5 +69,14 @@ const Home = () => {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    Character:{
+        flex:2,
+        flexDirection:'row',
+        justifyContent:'space-around',
+        alignItems:'center'
+    }
+});
 
 export default Home;
