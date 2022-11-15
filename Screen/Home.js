@@ -1,6 +1,6 @@
-import {View, Button, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Button, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Image } from "react-native"
-import { useNavigation } from '@react-navigation/native';
+
 
 //이미지 URL 객체
 const imageURL={
@@ -14,7 +14,7 @@ const imageURL={
 const Choose = (props) =>{
     return (
         <TouchableOpacity
-            onPress={() => props.navigation.navigate("StartQ")}
+            onPress={() => props.nav("StartQ")}
             style={{width:40,height:40,alignItems:'center'}}>
             <Image
             style={{
@@ -29,8 +29,9 @@ const Choose = (props) =>{
     );
 }  
 
-//HOME VIEW
+//*HOME VIEW*//
 const Home = (props) => {
+    const nav = (ScreenName) => {props.navigation.navigate(ScreenName)}
     return (
         <View style = {{flex:1,paddind:40}}>
             <View style={{flex:0.1}}/>
@@ -46,24 +47,12 @@ const Home = (props) => {
                 <Text style={{fontSize:25, fontWeight:'bold'}}>CHOOSE WHAT YOU WANT!</Text>
             </View>
             <View style = {styles.Character}>
-                    <TouchableOpacity
-                    onPress={() => props.navigation.navigate ("StartQ")}
-                    style={{width:40,height:40,alignItems:'center'}}>
-                    <Image
-                    style={{
-                        width: 115,
-                        height: 115,
-                        overflow: 'hidden'
-                    }}
-                    source = {require("../assets/Todd.png")}
-                    />
-                </TouchableOpacity>
-                <Choose name = 'Jen' title = "Jen's Curtains"/>
-                <Choose name = 'Todd' title = "Todd's Order"/>
+                <Choose name = 'Jen' title = "Jen's Curtains" nav={nav}/>
+                <Choose name = 'Todd' title = "Todd's Order" nav={nav}/>
             </View>
             <View style = {styles.Character}>
-                <Choose name = 'Ava' title = "Ava's Goal"/>
-                <Choose name = 'Mario' title = "Mario's Trip"/>
+                <Choose name = 'Ava' title = "Ava's Goal" nav={nav} />
+                <Choose name = 'Mario' title = "Mario's Trip" nav={nav}/>
             </View>
             <View style={{flex:2}}></View>
         </View>
