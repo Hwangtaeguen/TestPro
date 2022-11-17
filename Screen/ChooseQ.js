@@ -17,68 +17,37 @@ return(
                 How many pictures did Todd order?
             </Text>
         </View>
-        <Text style={{marginTop:20}}>Which stratege do you want to try?</Text>
-        <Bar></Bar> 
-        {/* 버튼이미지 위에 텍스트넣기 */}
-        <Button type="round"></Button>
+        <Text style={{marginTop:20, fontSize:18}}>Which stratege do you want to try?😀</Text>
+        <Bar contents="전략1" nav={props.nav}/>
+        <Bar contents="전략2" nav={props.nav}/>
+        <Bar contents="전략3" nav={props.nav}/>
 
 </View>
 )}
 
-//TouchbleOpacity: 전략선택 컴포넌트
+//Bar: 전략선택 Touchableopacity 컴포넌트
 const Bar = (props) => {
     return(
         <TouchableOpacity
-         style={{width:40,height:40,alignItems:'center'}}>
-        <Image
-            style={{
-                width:300,
-                height:45,
-                overflow: 'hidden'
-            }}
-            source = {require("../assets/Bar.png")}>
-        </Image>
+         style={{width:300,height:50,alignItems:'center',backgroundColor: '#3498db',
+         padding: 16,
+         margin: 10,
+         borderRadius: 8,
+         }}
+         onPress={()=>props.nav("Solve")}>
+        <Text>{props.contents}</Text>
         </TouchableOpacity>
     )
 }
 
-//축하메시지와 버튼 컴포넌트
-const Celebrate = () => {
+//*ChooseQ VIEW*//
+const ChooseQ = (props) =>{
+const nav = (ScreenName) => {props.navigation.navigate(ScreenName)}
   return(
-  <View>
-    <Text style = {{backgroundColor:'#b7f4d8', textAlign:'center', fontSize:20, fontWeight:'bold'}}>
-      ✨Good Job!😆✨
-    </Text>
-    <Button title="Let's solve it!⏩"/>
-  </View>
-  )}
-
-//*StartQ VIEW*//
-const ChooseQ = () => {
-const [text, setText] = useState("");
-const [mode, setmode] = useState("Question");
-     let content = null;
-     
-     //모드별 화면
-     //mode 'Question': 기본 화면
-     if(mode === "Question"){
-      content = 
       <View>
-        <Main text={text} setText={setText} mode={mode} setmode={setmode}/>
+        <Main nav={nav}/>
       </View>
-      
-      //mode 'Answer': 메시지, 버튼 추가
-      }else if(mode === "Answer"){
-      content = 
-      <View>
-        <Main text={text} setText={setText} mode={mode} setmode={setmode}/>
-        <Celebrate/>
-      </View>
-      }
-    
-    //보여지는 화면
-    return(content)
-};
+)}
 
 //스타일시트
 const styles = StyleSheet.create({

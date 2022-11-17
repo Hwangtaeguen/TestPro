@@ -4,6 +4,8 @@ import Start from './Start.js';
 import Home from './Home.js';
 import StartQ from './StartQ.js';
 import ChooseQ from './ChooseQ.js';
+import Solve from './Solve.js';
+
 
 
 
@@ -16,6 +18,7 @@ const OPscreen = ()=>{
         <Stack.Screen name = "Home" component={Home}/>
         <Stack.Screen name = "Start" component={Start}/>
         <Stack.Screen name = "ChooseQ" component={ChooseQ}/>
+        <Stack.Screen name = "Solve" component={Solve}/>
       </Stack.Navigator>
     </NavigationContainer>
     );

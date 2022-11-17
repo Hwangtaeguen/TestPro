@@ -19,7 +19,7 @@ return(
         </View>
         <Text style={{marginTop:20}}>what do you think the problem asking you to do?</Text>
         <TextInput 
-        style={{marginTop:20}} placeholder="Wirte your answer" value={props.text}
+        style={{marginTop:20}} placeholder="Write your answer" value={props.text}
         onChangeText={(text)=>{
           props.setText(text); 
         }}
@@ -35,7 +35,7 @@ const Celebrate = (props) => {
     <Text style = {{backgroundColor:'#b7f4d8', textAlign:'center', fontSize:20, fontWeight:'bold'}}>
       ✨Good Job!😆✨
     </Text>
-    <Button title="Let's solve it!⏩" onPress={() => props.nav("ChooseQ")}/>
+    <Button title="Let's solve it!" onPress={() => props.nav("ChooseQ")}></Button>
   </View>
   )}
 
