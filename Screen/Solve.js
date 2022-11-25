@@ -1,6 +1,7 @@
 import { View, Button, Text, TextInput, StyleSheet, Image } from 'react-native';
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useRoute } from '@react-navigation/native';
 
 //기본 화면 컴포넌트
 const Main = (props) =>{
@@ -65,7 +66,7 @@ const Complete = (props) => {
     </View>
 )}
 
-
+//step관리 변수,
 let stepCount = 0;
 //*Solve VIEW*//
 const Solve = (props) => {

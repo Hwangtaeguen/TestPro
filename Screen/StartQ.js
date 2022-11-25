@@ -1,25 +1,21 @@
 import { View, Button, Text, TextInput, StyleSheet } from 'react-native';
 import { useState } from 'react';
+import { useRoute } from '@react-navigation/native';
 
-//기본 화면 컴포넌트
+//메인 화면 컴포넌트
 const Main = (props) =>{
-
+  const route=useRoute()
 return(
 <View style={{alignItems:'center'}}>
         <View style={styles.box}>
-            <Text>
-                Todd orders pictures from a photographer.
-                Each picture costs $7.50.
-                A one-time shipping fee of $3.25 is added
-                to the cost of the order.
-                The total cost of Todd’s order before tax is $85.75.
-
-                How many pictures did Todd order?
-            </Text>
+            <Text style={styles.Header}>{route.params.title}</Text>
+            <Questions/>
         </View>
-        <Text style={{marginTop:20}}>what do you think the problem asking you to do?</Text>
+        <Text style={{marginTop:20, padding:10, fontSize:23, fontWeight:'bold'}}>💡what do you think {"\n"}      the problem asking you to do?</Text>
         <TextInput 
-        style={{marginTop:20}} placeholder="Write your answer" value={props.text}
+        style={styles.input} 
+        placeholder="Write your answer" 
+        value={props.text}
         onChangeText={(text)=>{
           props.setText(text); 
         }}
@@ -66,16 +62,63 @@ const nav = (ScreenName) => {props.navigation.navigate(ScreenName)}
     return(content)
 };
 
+//동적 질문 할당
+const Questions = () =>{
+  return(
+    <Text style={styles.text}>
+     Todd orders pictures from a photographer.
+    Each picture costs $7.50.
+    A one-time shipping fee of $3.25 is added
+    to the cost of the order.
+    The total cost of Todd’s order before tax is $85.75.{"\n"}{"\n"}{"\n"}
+
+    How many pictures did Todd order?
+    </Text>
+  )
+}
+
 //스타일시트
 const styles = StyleSheet.create({
   box: {
     marginTop:20,
-    justifyContent:'space-around',
     alignItems:'center',
-    backgroundColor: "#fff",
-    width: 300,
-    height: 200,
+    backgroundColor: "#F9F8F8",
+    width: 350,
+    height: 270,
+    backgrountRadius:8,
+    borderColor:"#a2d2ff",
+    borderWidth:3, 
+    borderRadius:20,
   },
+  text:{
+    marginTop:23,
+    marginLeft:23,
+    marginRight:23,
+    fontSize:16,
+    textAlign:'center'
+  },
+  Header:{
+    marginTop:0,
+    fontSize:20,
+    padding: 10,
+    backgroundColor:"#a2d2ff",
+    width:350, 
+    height:50, 
+    textAlign:'center', 
+    fontWeight:'bold',
+    overflow:"hidden", 
+    backgrountRadius:8,
+    borderColor:"#a2d2ff",
+    borderWidth:1, 
+    borderRadius:20,
+  },
+  input:{
+    margin:20,
+    height:40,
+    width:300,
+    borderColor: "#7a42f4",
+    borderWidth: 1,
+  }
 });
 
 export default StartQ;

@@ -2,6 +2,9 @@ import { View, Button, Text, TextInput, StyleSheet, Image } from 'react-native';
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+
+const BarCount = 3;
+
 //기본 화면 컴포넌트
 const Main = (props) =>{
 return(
@@ -18,12 +21,18 @@ return(
             </Text>
         </View>
         <Text style={{marginTop:20, fontSize:18}}>Which stratege do you want to try?😀</Text>
-        <Bar contents="전략1" nav={props.nav}/>
-        <Bar contents="전략2" nav={props.nav}/>
-        <Bar contents="전략3" nav={props.nav}/>
-
+        <BarCounter props={props} nav={props.nav}/>
 </View>
 )}
+
+//Bar를 전략의 개수만큼 동적 할당
+const BarCounter = (props)=>{
+  for(var i = 0; i < BarCount; i++){
+    return(
+      <Bar contents={"전략"+ i } nav={props.nav}/>
+    )
+  }  
+}
 
 //Bar: 전략선택 Touchableopacity 컴포넌트
 const Bar = (props) => {

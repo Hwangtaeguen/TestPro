@@ -1,6 +1,8 @@
+import { useNavigation } from '@react-navigation/native';
 import {View, Button, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 
 const Start = (props) => {
+    const navigation = useNavigation();
     return (
         <View style={{flex:1,flexDirection:'column',justifyContent:'space-around',alignItems:'center'}}>
             <View style={{flex:1}}/>
@@ -14,7 +16,7 @@ const Start = (props) => {
             <Text style = {styles.text}>TO GET STARTED!</Text>
             <TouchableOpacity
                 //PLAY BUTTON, HOME화면 전환
-                onPress={() => props.navigation.navigate ("Home")}
+                onPress={() => navigation.navigate("Home")}
                 style={{width:40,height:40,}}>
                 <Image
                 style={{
