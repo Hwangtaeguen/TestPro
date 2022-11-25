@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/native';
 import { View, Button, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { Image } from "react-native"
 
-
 //이미지 URL 객체
 const imageURL={
     'Jennifer' :  require("../assets/curtain.png"),
@@ -18,6 +17,8 @@ const imageURL={
 //TouchableOpacity(클릭에 반응하는) 캐릭터 생성 컴포넌트
 const Choose = (props) =>{
     const navigation = useNavigation()
+    const getPoint = 15;
+    const totalPoint = 20;
     return (
         <TouchableOpacity
             onPress={() => {return(navigation.navigate("StartQ",{title:props.title}))}}
@@ -27,6 +28,7 @@ const Choose = (props) =>{
             source = {imageURL[props.name]}
             />
             <Text style={styles.text}>{props.title}</Text>
+            <Text style={styles.points}>points{getPoint}/{totalPoint}</Text>
          </TouchableOpacity>
     );
 }  
@@ -49,20 +51,20 @@ const Home = (props) => {
                 <Text style={{fontSize:25, fontWeight:'bold'}}>CHOOSE WHAT YOU WANT!</Text>
             </View>
             <View style = {styles.Character}>
-                <Choose name = 'Jen' title = "Jen's running goal 🏃‍♂️"/>
-                <Choose name = 'Todd' title = "Todd's order 🖼️"/>
+                <Choose name = 'Jen' title = "Jen's running goal"/>
+                <Choose name = 'Todd' title = "Todd's order"/>
             </View>
             <View style = {styles.Character}>
-                <Choose name = 'Mario' title = "Mario's camping 🏕️"/>
-                <Choose name = 'Ava' title = "Ava's rectangle ⏹️" />
+                <Choose name = 'Mario' title = "Mario's camping"/>
+                <Choose name = 'Ava' title = "Ava's rectangle" />
             </View>
             <View style = {styles.Character}>
-                <Choose name = 'Jennifer' title = "Jennifer's curtains ✂️" />
-                <Choose name = 'Elena' title = "Elena's cardgame 🃏"/>
+                <Choose name = 'Jennifer' title = "Jennifer's curtains" />
+                <Choose name = 'Elena' title = "Elena's cardgame"/>
             </View>
             <View style = {styles.Character}>
-                <Choose name = 'Owen' title = "Owen's garden 🌱" />
-                <Choose name = 'Jim' title = "Jim's rent Car 🚗"/>
+                <Choose name = 'Owen' title = "Owen's garden" />
+                <Choose name = 'Jim' title = "Jim's rent Car"/>
             </View>
             <View style={{padding:50}}></View>
             </ScrollView>
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
         width:160, 
         height:30, 
         textAlign:'center',
-        fontSize:14, 
+        fontSize:16, 
         fontWeight:'bold',
         backgroundColor:"#F9F8F8",
         overflow:"hidden", 
@@ -98,6 +100,20 @@ const styles = StyleSheet.create({
         height: 80,
         overflow: 'hidden',
         marginBottom:10,
+    },
+    points:{
+        width:100,
+        height:30,
+        padding:5,
+        textAlign:'center',
+        fontSize:14, 
+        fontWeight:'bold',
+        backgroundColor:"#C1F4C5",
+        overflow:"hidden", 
+        backgrountRadius:8,
+        borderColor:"#C1F4C5", 
+        borderWidth:1, 
+        borderRadius:8
     }
 });
 

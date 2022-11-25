@@ -1,9 +1,8 @@
 import { View, Button, Text, TextInput, StyleSheet, Image } from 'react-native';
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
-
-const BarCount = 3;
 
 //기본 화면 컴포넌트
 const Main = (props) =>{
@@ -20,22 +19,19 @@ return(
                 How many pictures did Todd order?
             </Text>
         </View>
-        <Text style={{marginTop:20, fontSize:18}}>Which stratege do you want to try?😀</Text>
-        <BarCounter props={props} nav={props.nav}/>
+        <Text style={{marginTop:20, fontSize:18}}>Which stratege do you want to try?😀</Text> 
+        <Bar contents="전략1"></Bar>
+        <Bar contents="전략2"></Bar>
+        <Bar contents="전략3"></Bar>
+        <Bar contents="전략4"></Bar>
 </View>
 )}
 
-//Bar를 전략의 개수만큼 동적 할당
-const BarCounter = (props)=>{
-  for(var i = 0; i < BarCount; i++){
-    return(
-      <Bar contents={"전략"+ i } nav={props.nav}/>
-    )
-  }  
-}
+//Bar를 firebase전략의 개수만큼 동적 할당해야함
 
 //Bar: 전략선택 Touchableopacity 컴포넌트
 const Bar = (props) => {
+  const navigation = useNavigation();
     return(
         <TouchableOpacity
          style={{width:300,height:50,alignItems:'center',backgroundColor: '#3498db',
@@ -43,7 +39,7 @@ const Bar = (props) => {
          margin: 10,
          borderRadius: 8,
          }}
-         onPress={()=>props.nav("Solve")}>
+         onPress={()=> navigation.navigate("Solve")}>
         <Text>{props.contents}</Text>
         </TouchableOpacity>
     )
