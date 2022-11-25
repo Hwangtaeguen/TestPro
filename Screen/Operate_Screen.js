@@ -5,6 +5,8 @@ import Home from './Home.js';
 import StartQ from './StartQ.js';
 import ChooseQ from './ChooseQ.js';
 import Solve from './Solve.js';
+import Logins from './Login.js';
+import signupscreen from './Signup.js';
 
 
 
@@ -13,7 +15,10 @@ const Stack = createStackNavigator()
 const OPscreen = ()=>{
     return(
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Start'>
+      <Stack.Navigator initialRouteName='로그인 페이지'>
+
+        <Stack.Screen name = "로그인 페이지" component={Logins}/>
+        <Stack.Screen name = "회원가입 페이지" component={signupscreen}/>
         <Stack.Screen name = "StartQ" component={StartQ}/>
         <Stack.Screen name = "Home" component={Home}/>
         <Stack.Screen name = "Start" component={Start}/>
