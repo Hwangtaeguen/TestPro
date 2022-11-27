@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { View, TextInput, Button,StyleSheet,Text,SafeAreaView } from 'react-native';
-import { db } from '../firebase';
+import { db } from '../../firebase';
 import { addDoc , collection, setDoc,doc , where, query, getDocs } from 'firebase/firestore';
 import firestore from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
@@ -10,8 +11,8 @@ import Home from './Home';
 
 
 
-const signupscreen = (props) => {
-
+const Signup = (props) => {
+  const navigation = useNavigation();
   const userCollectionRef=collection(db,"회원가입 학생 이름,학번");
 
 const[ addID, setAddID ]=useState("");
@@ -118,7 +119,7 @@ return(
     value={addAge}
     placeholder="반 번호"
     />
-  <Button title="로그인페이지로이동" onPress={()=>{props.navigation.navigate("로그인 페이지") }} />
+  <Button title="로그인페이지로이동" onPress={()=>{navigation.reset({routes: [{name: "Login"}]})}}/>
   <Button title="회원가입버튼" onPress={sinup} />
 
 
@@ -138,4 +139,4 @@ input: {
 },
 });
 
-export default signupscreen;
+export default Signup;

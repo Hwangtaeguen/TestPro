@@ -1,34 +1,36 @@
 import { useNavigation } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import {View, Button, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 
 const Start = (props) => {
     const navigation = useNavigation();
+    const route = useRoute();
     return (
         <View style={{flex:1,flexDirection:'column',justifyContent:'space-around',alignItems:'center'}}>
-            <View style={{flex:1}}/>
+            <View style={{flex:1.7}}/>
             <Text style = {styles.Header}>HELLO,</Text>
-            <Text style = {styles.text}>EUNYOUNG!</Text>
+            <Text style = {styles.text}>{route.params.username}!</Text>
             <Image
             style={{width:80,height:80, marginBottom:30}}
-            source = {require("../assets/smiling-face.png")}>
+            source = {require("../../assets/smiling-face.png")}>
             </Image>
             <Text style = {styles.text}>PRESS THE PLAY BUTTON</Text>
             <Text style = {styles.text}>TO GET STARTED!</Text>
             <TouchableOpacity
                 //PLAY BUTTON, HOME화면 전환
-                onPress={() => navigation.navigate("Home")}
+                onPress={() => navigation.reset({routes: [{name: 'Home'}]})} 
                 style={{width:40,height:40,}}>
                 <Image
-                style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 100,
-                    overflow: 'hidden',
-                }}
-                source={require('../assets/play.png')}
+                    style={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: 100,
+                        overflow: 'hidden',
+                    }}
+                    source={require('../../assets/play.png')}
                 />
             </TouchableOpacity>
-            <View style={{flex:2}}/>
+            <View style={{flex:1.7}}/>
         </View>
         
     );

@@ -1,8 +1,9 @@
-import OPscreen from './Screen/Operate_Screen';
+import Navi from './Components/Operator/Navi.js';
+import AppRouter from './Components/Operator/Router.js';
 
 export default function App() {
   return (
-    <OPscreen/>
+    <Navi/>
   );
 }
 

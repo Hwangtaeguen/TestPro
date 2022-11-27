@@ -24,11 +24,13 @@ return(
         onChangeText={(text)=>{
           props.setText(text); 
         }}
-        onSubmitEditing={()=>props.setmode("Answer")}
+        onSubmitEditing={
+          ()=>props.setmode("Answer")
+        }
         />
-
 </View>
 )}
+//위에 정답인지 아닌지 구별하는 기능 필요. 
 
 const Bar = (props) => {
     return(
@@ -55,6 +57,18 @@ const Celebrate = (props) => {
     </View>
     )}
   
+//정답이 아닐때 띄우는 메세지와 다시 정답을 제출하는 버튼
+const Tryagain = (props) => {
+  return(
+  <View>
+    <Text style = {{backgroundColor:'#b7f4d8', textAlign:'center', fontSize:20, fontWeight:'bold'}}>
+      ✨Good Job!😆✨
+    </Text>
+    <Button title="Let's solve it!" onPress={() => props.nav("ChooseQ")}></Button>
+  </View>
+  )}
+
+
 //Step완료시 완료 메시지와 버튼 컴포넌트
 const Complete = (props) => {
     return(
@@ -97,6 +111,13 @@ const Solve = (props) => {
             <View>
                 <Main text={text} setText={setText} mode={mode} setmode={setmode}/>
                 <Celebrate text={text} setText={setText} mode={mode} setmode={setmode} stepCount={stepCount}/>
+            </View>
+          }else if(mode === "TryAgain"){
+            stepCount = stepCount + 1;
+            content = 
+            <View>
+                <Main text={text} setText={setText} mode={mode} setmode={setmode}/>
+                <Tryagain text={text} setText={setText} mode={mode} setmode={setmode} stepCount={stepCount}/>
             </View>
           }
         //보여지는 화면

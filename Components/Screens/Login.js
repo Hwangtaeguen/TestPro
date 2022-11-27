@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, TextInput, Button,StyleSheet,Text,SafeAreaView, Alert } from 'react-native';
-import { db } from '../firebase';
+import { db } from '../../firebase';
 import { addDoc , collection, where, query } from 'firebase/firestore';
 import firestore from 'firebase/firestore';
 import { Auth } from 'firebase/auth';
 import { getAuth, signInWithEmailAndPassword,createUserWithEmailAndPassword } from "firebase/auth";
 import Home from './Home';
 import Start from './Start';
+import { useNavigation } from '@react-navigation/native';
 
 
 const Logins = (props) => {
-
+    const navigation = useNavigation();
     const[ addID, setAddID ]=useState("");
     const[ addPass, setAddPass ]=useState("");
 
@@ -24,7 +25,7 @@ const Logins = (props) => {
         const user = userCredential.user;
         console.log(user.addID);
         alert("성공로그인!!완료!");
-        props.navigation.navigate("Start");
+        navigation.reset({routes: [{name: 'Start', params: {username: addID}}]}); //스택 초기화 (뒤로가기 ben)
 
       })
       .catch((error) => {
@@ -55,7 +56,7 @@ const Logins = (props) => {
       secureTextEntry/>
     
     <Button title="로그인 버튼" onPress={login} />
-    <Button title="회원가입페이지로이동" onPress={()=>{props.navigation.navigate("회원가입 페이지")
+    <Button title="회원가입페이지로이동" onPress={()=>{navigation.reset({routes: [{name: "Signup"}]});
   }} />
   
     </SafeAreaView>
