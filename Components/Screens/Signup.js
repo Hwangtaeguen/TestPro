@@ -110,7 +110,7 @@ return(
 </View>
 
 <View style={styles.fixToText}>
-  <Button title="로그인하기" color="#424242" onPress={()=>{navigation.reset({routes: [{name: "Login"}]})}}/>
+  <Button title="로그인하기" color="#424242" onPress={()=>{navigation.reset({routes: [{name: "Logins"}]})}}/>
   <Button title="회원가입완료" color="#819FF7" onPress={sinup} />
   </View>
 

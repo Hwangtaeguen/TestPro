@@ -6,6 +6,8 @@ import checkpage from '../Screens/CheckPage.js';
 import detailpage from '../Screens/Deailpage.js';
 import Logins from '../Screens/Login.js';
 import { ScreenStackHeaderRightView } from 'react-native-screens';
+import Signup from '../Screens/Signup.js';
+
 
 const Stack = createStackNavigator()
 const Navi = ()=>{
@@ -13,6 +15,7 @@ const Navi = ()=>{
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Logins">
       <Stack.Screen  name = "Logins" component={Logins}/>
+      <Stack.Screen  name = "Signup" component={Signup}/>
       <Stack.Screen  name = "welcomepage" component={welcomepage}/>
         <Stack.Screen  name = "checkpage" component={checkpage}/>
         <Stack.Screen  name = "detailpage" component={detailpage}/>
