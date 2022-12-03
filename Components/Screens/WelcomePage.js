@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import {View, Button, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 
-const Start = (props) => {
+const welcomepage = (props) => {
     const navigation = useNavigation();
     const route = useRoute();
     return (
@@ -17,8 +17,7 @@ const Start = (props) => {
             <Text style = {styles.text}>PRESS THE PLAY BUTTON</Text>
             <Text style = {styles.text}>TO GET STARTED!</Text>
             <TouchableOpacity
-                //PLAY BUTTON, HOME화면 전환
-                onPress={() => navigation.reset({routes: [{name: 'Home'}]})} 
+                onPress={() => navigation.reset({routes: [{name: 'checkpage', params: {username2: route.params.username }}]})} 
                 style={{width:40,height:40,}}>
                 <Image
                     style={{
@@ -54,4 +53,4 @@ const styles = StyleSheet.create({
     },
 });
   
-export default Start;
+export default welcomepage;
