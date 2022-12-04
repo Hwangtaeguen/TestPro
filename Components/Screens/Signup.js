@@ -15,13 +15,12 @@ import teacher from '../../assets/teacher.png';
 const Signup = (props) => {
 
   const navigation = useNavigation();
-  const userCollectionRef=collection(db,"TeacherUser");
+  const userCollectionRef=collection(db,"userInfo");
 
 const[ addID, setAddID ]=useState("");
 const[ addPass, setAddPass ]=useState("");
 const[ addName, setAddname ]=useState("");
 const[ country,setCountry]=useState("");
-
 
 const sinup = () => {
 
@@ -33,16 +32,17 @@ createUserWithEmailAndPassword(auth,addID,addPass)
     const user = userCredential.user;//인증용
     console.log(user.addID);//인증용
 
-    setDoc(doc(db,"TeacherUser",addID),// 스토어용
+    setDoc(doc(db,"userInfo",addID),// 스토어용
     { 
       선생님이름: addName,
-      아이디:addID,
-      반: country,
+      선생님아이디:addID,
+      선생님반: country,
+
     });
 
     setAddname("")
     alert("성공! 회원가입 완료");
-    navigation.navigate("Login");
+    navigation.navigate("Logins");
 
   })
   .catch((error) => {

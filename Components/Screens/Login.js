@@ -81,7 +81,8 @@ const Logins = (props) => {
       secureTextEntry/>
     <View style={styles.fixToText}>
     <Button title="로그인" onPress={login} color="#424242" />
-    <Button title="회원가입" color="#819FF7" onPress={()=>{navigation.reset({routes: [{name: "Signup"}]});
+    <Button title="회원가입" color="#819FF7" onPress={()=>{
+      navigation.reset({routes: [{name: "Signup"}]});
   }} />
   </View>
   

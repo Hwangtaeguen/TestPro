@@ -2,13 +2,14 @@ import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import {View, Button, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 
+
 const welcomepage = (props) => {
     const navigation = useNavigation();
     const route = useRoute();
     return (
         <View style={{flex:1,flexDirection:'column',justifyContent:'space-around',alignItems:'center'}}>
             <View style={{flex:1.7}}/>
-            <Text style = {styles.Header}>HELLO,</Text>
+            <Text style = {styles.Header}>Welcome,</Text>
             <Text style = {styles.text}>{route.params.username}!</Text>
             <Image
             style={{width:80,height:80, marginBottom:30}}

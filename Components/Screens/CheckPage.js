@@ -16,6 +16,10 @@ import {
 import { useEffect, useState } from 'react';
 import { db } from '../../firebase'
 import { useRoute } from '@react-navigation/native';
+
+
+
+
 //이미지 URL 객체
 const imageURL = {
     'Jennifer': require("../../assets/curtain.png"),
@@ -36,55 +40,26 @@ const checkpage = (props) => {
     const navigation = useNavigation();
     const [review, setReview] = useState([]);
     const [addID, setaddID] = useState("아이디");//set은 바꿀때 
-    const [addRN, setaddRN] = useState("내용");
-    const [banban, setbanban] = useState("");
+    const [name, setname] = useState("");
+    const [banban, setbanban] = useState(banban);
+    const aaa = [];
+    const bbb = [];
+    const [lenlen, setlenlen] = useState();
 
-    const GetReview = async () => {
-        try {
-            const data = await getDocs(collection(db, '/any/MBhsEMkdUy394BbELXLS/review'))
-            const Data = data.docs.map(doc => ({ ...doc.data(), id: doc.id }))
-            console.log(Data)
-            setReview(Data)
-            console.log(Data[0].ID)
-            const WantID = Data[0].ID
-            console.log(WantID)
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
-
-    const docRef = doc(db, "any", "doc")
-    const colRef = collection(docRef, "imadethis")
-    const AddReview = async () => {
-        try {
-            await addDoc(colRef, {
-                ID: addID,
-                RN: addRN,
-                createAt: new Date(),
-            });
-            alert("added")
-            setaddID("")
-            setaddRN("")
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
+    const dddd = route.params.username2;
 
 
-
-
-
-
-    const queryDB = async ()=>{
-        const dddd = route.params.username2;
+    const queryDB = async ()=>{ // 몇반인지 띄워주는 함수 
+        
         try{
-          const q = query(collection(db, "TeacherUser" ), where( "아이디" , "==" , dddd))
+          const q = query(collection(db, "userInfo" ), where( "선생님아이디" , "==" , dddd))
           const singleDoc = await getDocs(q);
-          const Data = singleDoc.docs.map(doc => ({ ...doc.data() }));
-          console.log(Data);
-          console.log(Data[0].반);
-          setbanban(Data[0].반);
-          console.log(ban);
+          const Data = singleDoc.docs.map(doc => ({ ...doc.data(), id: doc.id  }));
+          console.log("선생님모든데이터",Data);
+          console.log("선생님 반",Data[0].선생님반);
+          setbanban(Data[0].선생님반);
+          console.log("반반",banban);
+          
 
         }catch(error){
           console.log(error.message)
@@ -94,19 +69,61 @@ const checkpage = (props) => {
 
 
 
+      const queryD = async ()=>{ //학생이름 불러오는 함수
+        try{
+          const q = query(collection(db, "userInfo" ), where( "반" , "==" , banban))
+          const singleDoc = await getDocs(q);
+          const Data = singleDoc.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+          const datalenght = Data.length;
 
 
+          console.log("반반커리데이터",Data);
 
+          for(let i in Data){
+            if(Data[0]["반"] == banban){
+                aaa[i] += Data[i]["학생이름"]
+                bbb[i] += Data[i]["점수"]
 
+            }
+        }
+        console.log("zz",aaa[0]);
+        console.log("zz",aaa[1]);
+        console.log("zz",bbb[0]);
+        console.log("zz",bbb[1]);
+        setlenlen(Data)
 
+        }catch(error){
+          console.log(error.message)
+        }
+      }
 
+    
+    queryDB();
+
+    useEffect(()=>{
+        queryD();
+    },[banban]);
 
 
 
     return (
-        <View>
-            <View><Text>{banban}</Text></View>
-          
+        <View><Text>{banban} 학생 리스트</Text>
+            
+
+
+        {lenlen?.map((row,idx) => {//옵셔널 채이닝 : 에러가 발생하지 않을려고 user객체에 속성이없으면 애러발생함. ?쓰면 애러발생 없이 undefined반환
+        
+        const namename = row.학생이름;
+        const score = row.점수;
+        return (
+          <>
+            <Text>{namename}</Text>
+            <Text>{score}</Text>
+            <Button title="학생세부정보"onPress={()=>{navigation.reset({routes: [{name: "detailpage" ,params:{namename:namename, score:score,banban:banban} }]})}}/>
+          </>
+        );
+      })}
+
                 <View style={{ padding: 20 }} />
                 <View>
                     <Text>꼴등학생점수 : 00</Text>
@@ -114,43 +131,16 @@ const checkpage = (props) => {
                     <Text>1등학생 점수 : 00</Text>
                 </View>
                     <ScrollView>
-                    <Choose name='Jen' title="Jen's running goal" />
-                    <Choose name='Todd' title="Todd's order" />
-                    <Choose name='Mario' title="Mario's camping" />
-                    <Choose name='Ava' title="Ava's rectangle" />
-                    <Choose name='Jennifer' title="Jennifer's curtains" />
-                    <Choose name='Elena' title="Elena's cardgame" />
-                    <Choose name='Owen' title="Owen's garden" />
-                    <Choose name='Jim' title="Jim's rent Car" />
-                    <Choose name='Owen' title="Owen's garden" />
-                    <Choose name='Jim' title="Jim's rent Car" />
-                    <Choose name='Owen' title="Owen's garden" />
-                    <Choose name='Jim' title="Jim's rent Car" />
-                    <Choose name='Owen' title="Owen's garden" />
-                    <Choose name='Jim' title="Jim's rent Car" />
-                    <Choose name='Owen' title="Owen's garden" />
-                    <Choose name='Jim' title="Jim's rent Car" />
-                    <Choose name='Owen' title="Owen's garden" />
-                    <Choose name='Jim' title="Jim's rent Car" />
-                    <Choose name='Owen' title="Owen's garden" />
-                    <Choose name='Jim' title="Jim's rent Car" />
+         
                     </ScrollView>
-                    <Button title='ddd' onPress={queryDB}/>
         
         </View>
     );
+
+
+    
 }
 
-const Choose = (props) => {
-    const navigation = useNavigation()
-    const getPoint = 15;
-    const totalPoint = 20;
-    return (
-        <Text>학생 이름 : ??점수 : ??
-            <Button title='학생 새부정보' onPress={()=>{navigation.navigate("detailpage")}}></Button>
-        </Text>
-    );
-}
 
 
 const styles = StyleSheet.create({
