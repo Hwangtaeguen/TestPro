@@ -5,10 +5,11 @@ import { View, TextInput, Button,StyleSheet,Text,SafeAreaView,Image } from 'reac
 import { db } from '../../firebase';
 import { addDoc , collection, setDoc,doc , where, query, getDocs } from 'firebase/firestore';
 import firestore from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { Auth } from 'firebase/auth';
 import { Picker } from '@react-native-picker/picker';
-import teacher from '../../assets/teacher.png';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import teacher2 from '../../assets/teacher2.png'
 
 
 
@@ -16,7 +17,6 @@ const Signup = (props) => {
 
   const navigation = useNavigation();
   const userCollectionRef=collection(db,"userInfo");
-
 const[ addID, setAddID ]=useState("");
 const[ addPass, setAddPass ]=useState("");
 const[ addName, setAddname ]=useState("");
@@ -32,7 +32,7 @@ createUserWithEmailAndPassword(auth,addID,addPass)
     const user = userCredential.user;//인증용
     console.log(user.addID);//인증용
 
-    setDoc(doc(db,"userInfo",addID),// 스토어용
+    setDoc(doc(db,"userInfo",addID),// 스토어용S
     { 
       선생님이름: addName,
       선생님아이디:addID,
@@ -64,6 +64,7 @@ createUserWithEmailAndPassword(auth,addID,addPass)
 
 
 return(
+  <KeyboardAwareScrollView>
 <View style= {{marginTop:30}}>
 <View style = {{alignItems:'center'}}>
       <Image 
@@ -71,7 +72,7 @@ return(
       width: 300,
       height: 300,
       marginBottom: 15,}}
-      source={teacher}/>
+      source={teacher2}/>
     </View>
 
   <StatusBar style="auto"/>
@@ -119,7 +120,7 @@ return(
 
   </SafeAreaView>
   </View>
-  
+  </KeyboardAwareScrollView>
 )
 
 }

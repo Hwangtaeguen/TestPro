@@ -6,9 +6,9 @@ import { addDoc , collection, where, query,doc,getDoc } from 'firebase/firestore
 import firestore from 'firebase/firestore';
 import { Auth } from 'firebase/auth';
 import { getAuth, signInWithEmailAndPassword,createUserWithEmailAndPassword } from "firebase/auth";
-import welcomepage from './welcomepage';
 import { useNavigation } from '@react-navigation/native';
-import teacher from '../../assets/teacher.png';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import teacher2 from '../../assets/teacher2.png'
 
 
 
@@ -53,6 +53,7 @@ const Logins = (props) => {
     }
   
   return(
+    <KeyboardAwareScrollView>
   <View style= {{
     marginTop:10,
     backgroundColor:'#F4FA58'
@@ -64,7 +65,7 @@ const Logins = (props) => {
       width: 500,
       height: 500,
       marginBottom: 15,}}
-      source={teacher}/>
+      source={teacher2}/>
     </View>
   <SafeAreaView >
       <TextInput 
@@ -88,6 +89,7 @@ const Logins = (props) => {
   
     </SafeAreaView>
     </View>
+    </KeyboardAwareScrollView>
   )
     
   
